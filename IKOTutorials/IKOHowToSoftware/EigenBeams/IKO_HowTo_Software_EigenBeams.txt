@@ -1,0 +1,110 @@
+####################################
+IKO by IEM and sonible, October 2017
+IKO 'Eigen'-Beams  
+####################################
+
+ambiX encoding (ACN with SN3D)
+mcfx_convolver max_rRE decoding (ACN with SN3D->N3D, mirror left<->right, front<->back)
+
+'Eigen'-Beams refers to beam directions exactly matching the 20 IKO surface outward normals, i.e. the main lobes of the 20 loudspeakers
+
+
+1.) Ambisonics En-/Decoder Handling
+The 3rd order ambiX encoder plugin 'ambix_encoder_03' and the IKO filter->mcfx_convolver24 based decoder
+build a consistent Ambisonics en-/decoding scheme for a meaningful IKO beam direction visualization on the sphere
+within the ambiX encoder GUI
+Note: no further HOA processing is required!
+
+To use this convention properly:
+
+2.) IKO setup as top view:
+
+backward reflector / wall
+
+	z (directs up into the ceiling)
+	o---------------------------------------> y (right from listener's viewpoint)
+   IKO (beam direction 1,6 facing to listener)
+	|
+	|
+	|
+	|
+	\/
+	x	
+	frontal listener 
+	beams 1 and 6
+	with looking direction from here to the IKO, i.e. looking towards beam directions 1 and 6
+	see IKO_NumberingScheme_FrontalView.jpg for frontal view
+	there is an 'IKO IEM/sonible' logo at the IKO surface that belongs to 'Eigen'-Beam direction 11, right/below
+	from which beam direction 1 can be derived based on the table below
+
+
+3.) table of IKO 'Eigen'-Beams using the ambiX encoder and corresponding IEM OSIL / sonible decoders:
+
+Beam 	Azimuth		Elevation
+1		180			+53
+2		+108		+53
+3		+36			+53
+4		-36			+53
+5		-108		+53
+6		180			+11
+7		+108		+11
+8		+36			+11
+9		-36			+11
+10		-108		+11
+11		+144		-11
+12		+72			-11
+13		0			-11
+14		-72			-11
+15		-144		-11
+16		+144		-53
+17		+72			-53
+18		0			-53
+19		-72			-53
+20		-144		-53
+
+in the Cartesian space this corresponds to angle pairs 
+beam 1			AZ = 0 deg 			EL = 37.4 deg
+beam 2			AZ = 72.0 deg 		EL = 37.4 deg
+beam 3			AZ = 144.0 deg 		EL = 37.4 deg
+beam 4			AZ = 216.0 deg 		EL = 37.4 deg
+beam 5			AZ = 288.0 deg 		EL = 37.4 deg
+beam 6			AZ = 0 deg 			EL = 79.2 deg
+beam 7			AZ = 72.0 deg 		EL = 79.2 deg
+beam 8			AZ = 144.0 deg 		EL = 79.2 deg
+beam 9			AZ = 216.0 deg 		EL = 79.2 deg
+beam 10			AZ = 288.0 deg 		EL = 79.2 deg
+beam 11			AZ = 36.0 deg 		EL = 100.8 deg
+beam 12			AZ = 108.0 deg 		EL = 100.8 deg
+beam 13			AZ = 180.0 deg 		EL = 100.8 deg
+beam 14			AZ = 252.0 deg 		EL = 100.8 deg
+beam 15			AZ = 324.0 deg 		EL = 100.8 deg
+beam 16			AZ = 36.0 deg 		EL = 142.6 deg
+beam 17			AZ = 108.0 deg 		EL = 142.6 deg
+beam 18			AZ = 180.0 deg 		EL = 142.6 deg
+beam 19			AZ = 252.0 deg 		EL = 142.6 deg
+beam 20			AZ = 324.0 deg 		EL = 142.6 deg
+using the coordinate system convention
+x = r sin(EL) cos(AZ)
+y = r sin(EL) sin(AZ)
+z = r cos(EL)
+EL...elevation angle [0...pi], AZ...azimuth angle [0...2pi)
+see http://dlmf.nist.gov/1.5#E16
+this is also used in the IKO numbering scheme in the tutorial IKO_HowTo_Software_x.xx.pdf
+
+4.) ambiX encoder sphere visualization
+
+With the used en-/decoder convention, the sphere in the ambiX encoder shows the upper hemisphere of the IKO when looking the IKO from above, just like the little
+ASCII picture above. Thus, the screen shots
+
+ambiX_Encoder_IKO_1_BeamTo_LEFT.png
+ambiX_Encoder_IKO_2_BeamTo_RIGHT.png
+ambiX_Encoder_IKO_3_BeamTo_FRONT.png
+ambiX_Encoder_IKO_4_BeamTo_BACK.png
+ambiX_Encoder_IKO_5_BeamTo_UP.png
+ambiX_Encoder_IKO_6_BeamTo_DOWN.png
+
+show the ambiX encoding that would lead to the intended beam directions. 
+A 0dBFS 1kHz Sine, with all bus gains 0dB with the filter set 'IKO6_September_2017.conf' (generated: 15-Sep-2017 14:29:17) load
+into mcfx_convolver is shown. No further HOA-based processing is required! The HOA bus just contains a mcfx_gaindelay (to mute certain HOA modes) and a meter for the 16 HOA-ACN signals (not shown in the screenshots).
+
+Have fun!
