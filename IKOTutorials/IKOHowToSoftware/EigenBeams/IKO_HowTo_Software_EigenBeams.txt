@@ -1,19 +1,20 @@
 ####################################
 IKO by IEM and sonible, October 2017
 IKO 'Eigen'-Beams  
+Author: fs446
 ####################################
 
-ambiX encoding (ACN with SN3D)
-mcfx_convolver max_rRE decoding (ACN with SN3D->N3D, mirror left<->right, front<->back)
+ambiX encoding (ACN with SN3D with ambiX specific coordinate system convention)
+mcfx_convolver decoding with frequency dependent max_rE weighting (ACN with SN3D->N3D, mirror left<->right, front<->back)
 
-'Eigen'-Beams refers to beam directions exactly matching the 20 IKO surface outward normals, i.e. the main lobes of the 20 loudspeakers
+'Eigen'-Beams refers to the IKO face normals, i.e. beam directions exactly matching the 20 IKO surface outward normals, i.e. the main lobes of the 20 loudspeakers
 
 
 1.) Ambisonics En-/Decoder Handling
-The 3rd order ambiX encoder plugin 'ambix_encoder_03' and the IKO filter->mcfx_convolver24 based decoder
+The 3rd order ambiX encoder plugin 'ambix_encoder_o3' and the IKO filter->mcfx_convolver24 based decoder
 build a consistent Ambisonics en-/decoding scheme for a meaningful IKO beam direction visualization on the sphere
 within the ambiX encoder GUI
-Note: no further HOA processing is required!
+Note: no further HOA en-/decoding processing is required!
 
 To use this convention properly:
 
